@@ -1,0 +1,320 @@
+:root {
+  --black: #080c0b;
+  --surface: #0b1110;
+  --shadow-a: #070a09;
+  --shadow-b: #080b0a;
+  --ink: #f4f7f0;
+  --muted: #adb8ae;
+  --acid: #ccff33;
+  --violet: #958cff;
+  --line: rgba(244, 247, 240, 0.16);
+  --mouse-x: 50%;
+  --mouse-y: 24%;
+  --display: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  --body: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  min-width: 20rem;
+  margin: 0;
+  color: var(--ink);
+  background: var(--black);
+  font-family: var(--body);
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--acid);
+  outline-offset: 4px;
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 30;
+  padding: 0.7rem 1rem;
+  color: var(--black);
+  background: var(--acid);
+  font-weight: 750;
+  transform: translateY(-160%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.site-header {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 20;
+  padding: clamp(1.1rem, 3vw, 2rem) clamp(1.1rem, 4vw, 3.5rem);
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 650;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.site-nav a {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.65rem 0;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.site-domain {
+  color: var(--muted);
+}
+
+.site-nav a:hover,
+.site-nav a:focus-visible {
+  color: var(--acid);
+}
+
+.hero {
+  position: relative;
+  display: grid;
+  min-height: 100svh;
+  overflow: hidden;
+  padding: 7rem 2rem 4rem;
+  place-items: center;
+  background:
+    radial-gradient(38rem circle at var(--mouse-x) var(--mouse-y), rgba(204, 255, 51, 0.1), transparent 65%),
+    radial-gradient(circle at 72% 32%, rgba(149, 140, 255, 0.15), transparent 28rem),
+    linear-gradient(150deg, var(--shadow-a) 8%, var(--surface) 56%, var(--shadow-b) 100%);
+  text-align: center;
+}
+
+.hero::before {
+  position: absolute;
+  inset: 0;
+  opacity: 0.1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+  content: "";
+  pointer-events: none;
+}
+
+.system {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.grid-plane {
+  position: absolute;
+  right: -10%;
+  bottom: -35%;
+  left: -10%;
+  height: 72%;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: clamp(2.5rem, 5vw, 5rem) clamp(2.5rem, 5vw, 5rem);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 32%);
+  mask-image: linear-gradient(to bottom, transparent, black 32%);
+  transform: perspective(35rem) rotateX(56deg);
+  transform-origin: center top;
+}
+
+.scan-line {
+  position: absolute;
+  top: 27%;
+  right: 8%;
+  left: 8%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(204, 255, 51, 0.52), transparent);
+  box-shadow: 0 0 2.5rem 0.2rem rgba(204, 255, 51, 0.14);
+  animation: scan 10s ease-in-out infinite alternate;
+}
+
+.node {
+  position: absolute;
+  width: 0.36rem;
+  height: 0.36rem;
+  border-radius: 50%;
+  background: var(--acid);
+  box-shadow: 0 0 1.5rem 0.35rem rgba(204, 255, 51, 0.32);
+}
+
+.node-one {
+  top: 24%;
+  left: 17%;
+}
+
+.node-two {
+  top: 64%;
+  right: 18%;
+  background: var(--violet);
+  box-shadow: 0 0 1.5rem 0.35rem rgba(149, 140, 255, 0.34);
+}
+
+.node-three {
+  right: 37%;
+  bottom: 14%;
+}
+
+.prompt {
+  position: absolute;
+  right: clamp(1.25rem, 4vw, 3.5rem);
+  bottom: clamp(1.2rem, 3vw, 2rem);
+  color: rgba(204, 255, 51, 0.55);
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.08em;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+h1 {
+  display: flex;
+  margin: 0;
+  flex-direction: column;
+  font-family: var(--display);
+  font-size: clamp(4.5rem, 13vw, 11rem);
+  font-weight: 900;
+  letter-spacing: -0.075em;
+  line-height: 0.72;
+  text-transform: uppercase;
+}
+
+.code-word {
+  color: var(--acid);
+  font-family: var(--mono);
+  font-size: 0.66em;
+  letter-spacing: -0.1em;
+}
+
+.hero-inner > p {
+  margin: clamp(2rem, 4vw, 3rem) 0 0;
+  color: var(--muted);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.05rem, 2.5vw, 1.55rem);
+  font-style: italic;
+  letter-spacing: 0.1em;
+}
+
+.speech-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 2.5rem;
+  margin-top: clamp(3rem, 6vw, 4.5rem);
+  padding: 0.7rem 0;
+  border-bottom: 1px solid rgba(244, 247, 240, 0.44);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: border-color 180ms ease, color 180ms ease;
+}
+
+.speech-link:hover,
+.speech-link:focus-visible {
+  border-color: var(--acid);
+  color: var(--acid);
+}
+
+.js h1 > span,
+.js .hero-inner > p,
+.js .speech-link {
+  opacity: 0;
+  animation: enter 750ms ease-out forwards;
+}
+
+.js .code-word {
+  animation-delay: 100ms;
+}
+
+.js .hero-inner > p {
+  animation-delay: 220ms;
+}
+
+.js .speech-link {
+  animation-delay: 380ms;
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(1.4rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scan {
+  to {
+    opacity: 0.45;
+    transform: translateY(44vh);
+  }
+}
+
+@media (max-width: 540px) {
+  .site-header {
+    padding-top: 1rem;
+  }
+
+  .hero {
+    padding: 6.5rem 1.25rem 3.5rem;
+  }
+
+  h1 {
+    font-size: clamp(4.1rem, 22vw, 6.5rem);
+  }
+
+  .grid-plane {
+    bottom: -14%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .js h1 > span,
+  .js .hero-inner > p,
+  .js .speech-link {
+    opacity: 1;
+    transform: none;
+  }
+}
